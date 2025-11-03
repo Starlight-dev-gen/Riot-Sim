@@ -46,8 +46,11 @@ func _new_game():
 func _on_enemy_timer_timeout() -> void:
 	var enemy = enemy_scene.instantiate() # Create a new instance of the enemy.
 	var enemy_spawn_loc = get_node("EnemyPath/EnemySpawnPosition") # Choose random location on path.
-	enemy_spawn_loc.progress_ratio = randf()
-	enemy.position = enemy_spawn_loc.position # Send enemy to random position.
+	# enemy_spawn_loc.progress_ratio = randf()
+	# enemy.position = enemy_spawn_loc.position # VECTOR2!! Send enemy to random position.
+	enemy.position = Vector2(
+		randf_range(0, DisplayServer.screen_get_size().x),
+		randf_range(0, DisplayServer.screen_get_size().y))
 	var direction = enemy_spawn_loc.rotation + PI / 2 # Turn enemy perpendicular to path (90°).
 	direction += randf_range(-PI / 4, PI / 4) # Randomise direction (within 45°).
 	# enemy.rotation = direction # Apply rotations.

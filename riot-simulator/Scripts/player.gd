@@ -6,14 +6,14 @@ signal hit
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	screen_size = get_viewport_rect().size
+	# screen_size = get_viewport_rect().size
 	get_node("AnimatedSprite2D").play()
 	# hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	# screen_size = get_viewport_rect().size
+	screen_size = get_viewport_rect().size # GOOD CHANGE. KEEP. FIND A WAY TO FIX ENEMY SPAWN.
 	var velocity = Vector2.ZERO
 	
 	if Input.is_action_pressed("Move_right"):
