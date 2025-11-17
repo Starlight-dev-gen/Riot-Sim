@@ -6,3 +6,6 @@ Fixed a bug where enemies would spawn inside the player by relegating their spaw
 
 17/11/2025 - godot - commit 0:
 Fixed a bug where enemies would be facing the wrong direction and not enter the playing field when spawning.
+
+17/11/2025 - godot - commit 1:
+Implemented stopping and animation for getting hit by an enemy.
