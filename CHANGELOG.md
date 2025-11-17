@@ -3,3 +3,6 @@ Fixed a bug where enemy spawn boundary would be the wrong size if window size wa
 
 10/11/2025 - godot - commit 0:
 Fixed a bug where enemies would spawn inside the player by relegating their spawn position to the edge of the map.
+
+17/11/2025 - godot - commit 0:
+Fixed a bug where enemies would be facing the wrong direction and not enter the playing field when spawning.
