@@ -46,18 +46,27 @@ func _new_game():
 func _on_enemy_timer_timeout() -> void:
 	var enemy = enemy_scene.instantiate() # Create a new instance of the enemy.
 	var enemy_spawn_loc = get_node("EnemyPath/EnemySpawnPosition") # Choose random location on path.
-	# dsenemy_spawn_loc.progress_ratio = randf()
-	# enemy.position = enemy_spawn_loc.position # VECTOR2!! Send enemy to random position.
-	var fiddy = randi_range(0,1)
-	if fiddy == 0:
+	enemy_spawn_loc.progress_ratio = randf()
+	enemy.position = enemy_spawn_loc.position # VECTOR2!! Send enemy to random position.
+	var ranny = randi_range(0,3)
+	if ranny == 0:
 		enemy.position = Vector2(randf_range(0, DisplayServer.screen_get_size().x), 0)
-	else:
+	elif ranny == 2:
+		enemy.position = Vector2(randf_range(0, DisplayServer.screen_get_size().x),
+			DisplayServer.screen_get_size().y)
+	elif ranny == 1:
 		enemy.position = Vector2(0, randf_range(0, DisplayServer.screen_get_size().y))
+	else:
+		enemy.position = Vector2(DisplayServer.screen_get_size().x,
+			randf_range(0, DisplayServer.screen_get_size().y))
 	var direction = enemy_spawn_loc.rotation + PI / 2 # Turn enemy perpendicular to path (90°).
-	direction += randf_range(-PI / 4, PI / 4) # Randomise direction (within 45°).
+	direction = get_node("Player").position - enemy.position 
+	# direction += randf_range(-PI / 4, PI / 4) # Randomise direction (within 45°).
 	# enemy.rotation = direction # Apply rotations.
-	var velocity = Vector2(randf_range(200.0, 300), 0.0) # Make random velocity vector.
-	enemy.linear_velocity = velocity.rotated(direction) # Turn vector to direction.
+	# var velocity = Vector2(randf_range(200.0, 300), 0.0) # Make random velocity vector.
+	# enemy.linear_velocity = velocity.rotated(direction) # Turn vector to direction.
+	enemy.linear_velocity = direction
+	# enemy.linear_velocity = enemy.linear_velocity.clamp(Vector2.ZERO, Vector2(500, 500)) 
 	add_child(enemy) # Spawn the poor sod.
 
 
