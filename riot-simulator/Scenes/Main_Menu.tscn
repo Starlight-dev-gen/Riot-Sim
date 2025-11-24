@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://73h2n20nolhn"]
 
 [ext_resource type="Script" uid="uid://b45jl1igohi5y" path="res://Scripts/main_menu.gd" id="1_hkybe"]
-[ext_resource type="Texture2D" uid="uid://owtayfpqyd0r" path="res://Assets/ori_3471053_717a58237fb731d59ca8cff92842420e25e863cd_hands-in-cuffs-holding-prison-bars.jpg" id="2_nrxv3"]
+[ext_resource type="Texture2D" uid="uid://dtevig70rbxxg" path="res://Assets/360_F_163205363_5YgJBWSKY0dbO4ESsGuLpJDQOH3xlg3g.jpg" id="2_b7rmo"]
 [ext_resource type="FontFile" uid="uid://c25r3uk53bbx4" path="res://Assets/Super Joyful.ttf" id="3_i7rp1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wugcc"]
-texture = ExtResource("2_nrxv3")
+texture = ExtResource("2_b7rmo")
 modulate_color = Color(0.31431612, 0.31431612, 0.3143161, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wugcc"]
