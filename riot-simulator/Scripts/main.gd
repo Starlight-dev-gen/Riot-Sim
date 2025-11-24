@@ -64,7 +64,7 @@ func _on_enemy_timer_timeout() -> void:
 	# enemy.linear_velocity = velocity.rotated(direction) # Turn vector to direction.
 	enemy.linear_velocity = Vector2(direction.x, direction.y)
 	# enemy.linear_velocity = enemy.linear_velocity.normalized() * enemy.linear_velocity.length()
-	if (sqrt(enemy.linear_velocity.x ** 2 + enemy.linear_velocity.y **2) > 600): # change number from static to fraction of screen size
+	if (sqrt(enemy.linear_velocity.x ** 2 + enemy.linear_velocity.y **2) > 600):
 		var lambda = 600 ** 2 / (enemy.linear_velocity.x ** 2 + enemy.linear_velocity.y ** 2)
 		enemy.linear_velocity.x *= lambda
 		enemy.linear_velocity.y *= lambda
