@@ -59,14 +59,18 @@ func _on_enemy_timer_timeout() -> void:
 	else:
 		enemy.position = Vector2(DisplayServer.screen_get_size().x,
 			randf_range(0, DisplayServer.screen_get_size().y))
-	var direction = enemy_spawn_loc.rotation + PI / 2 # Turn enemy perpendicular to path (90°).
-	direction = get_node("Player").position - enemy.position 
+	# var direction = enemy_spawn_loc.rotation + PI / 2 # Turn enemy perpendicular to path (90°).
+	var direction = get_node("Player").position - enemy.position 
 	# direction += randf_range(-PI / 4, PI / 4) # Randomise direction (within 45°).
 	# enemy.rotation = direction # Apply rotations.
 	# var velocity = Vector2(randf_range(200.0, 300), 0.0) # Make random velocity vector.
 	# enemy.linear_velocity = velocity.rotated(direction) # Turn vector to direction.
-	enemy.linear_velocity = direction
-	# enemy.linear_velocity = enemy.linear_velocity.clamp(Vector2.ZERO, Vector2(500, 500)) 
+	enemy.linear_velocity = Vector2(direction.x, direction.y)
+	# enemy.linear_velocity = enemy.linear_velocity.normalized() * enemy.linear_velocity.length()
+	if (sqrt(enemy.linear_velocity.x ** 2 + enemy.linear_velocity.y **2) > 600):
+		var lambda = 600 ** 2 / (enemy.linear_velocity.x ** 2 + enemy.linear_velocity.y ** 2)
+		enemy.linear_velocity.x *= lambda
+		enemy.linear_velocity.y *= lambda
 	add_child(enemy) # Spawn the poor sod.
 
 

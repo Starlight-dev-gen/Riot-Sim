@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d1w4jied5ch6i"]
+[gd_scene load_steps=13 format=3 uid="uid://d1w4jied5ch6i"]
 
 [ext_resource type="Texture2D" uid="uid://c6eudsqy67q7" path="res://Assets/SprPlayerDefault0.png" id="1_3smsa"]
 [ext_resource type="Script" uid="uid://cmp7g3iyrahb3" path="res://Scripts/player.gd" id="1_8erm5"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://d1iy04i188yqh" path="res://Assets/SprPlayerDefault3.png" id="4_tx1dd"]
 [ext_resource type="Texture2D" uid="uid://sfg2i0maqfl" path="res://Assets/SprPlayerWalk1.png" id="5_gymyn"]
 [ext_resource type="Texture2D" uid="uid://cc68uoccm2f6n" path="res://Assets/SprPlayerWalk2.png" id="6_pu2lt"]
+[ext_resource type="Texture2D" uid="uid://dmo18dfht53ch" path="res://Assets/SprPlayerHit0.png" id="6_tx1dd"]
+[ext_resource type="Texture2D" uid="uid://1hefnrw4yvgo" path="res://Assets/SprPlayerHit1.png" id="7_gymyn"]
 [ext_resource type="Texture2D" uid="uid://b5da3h2hhgeia" path="res://Assets/SprPlayerWalk3.png" id="7_ukyrk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7dp3o"]
@@ -54,6 +56,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("6_tx1dd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gymyn")
+}],
+"loop": true,
+"name": &"get_hit",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("1_3smsa")
 }, {
 "duration": 1.0,
@@ -79,7 +92,9 @@ metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7dp3o")
-animation = &"walk"
+animation = &"get_hit"
+frame = 1
+frame_progress = 0.07589752
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_h4iuc")
