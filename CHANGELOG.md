@@ -16,5 +16,8 @@ Fixed a bug where enemies would spawn with way too much speed.
 24/11/2025 - godot - commit 1:
 Removed some lines that no longer served a purpose.
 
-24/11/2035 - godot - commmit 2:
+24/11/2025 - godot - commmit 2:
 Fixed main menu background being the wrong image.
+
+24/11/2025 - godot - commit 3:
+Made the enemies face the correct way while moving.
