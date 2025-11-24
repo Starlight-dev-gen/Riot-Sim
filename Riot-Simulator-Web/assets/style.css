@@ -1,0 +1,428 @@
+/* ========== Variables ========== */
+:root{
+  --bg:#050505;
+  --panel:#0d0d0d;
+  --panel-2:#080808;
+  --accent:#ff4757;
+  --accent-2:#c41e2e;
+  --muted:#909090;
+  --muted-2:#666;
+  --blue:#667eea;
+  --violet:#764ba2;
+  --glass: rgba(255,255,255,0.03);
+  --card-border: #1a1a1a;
+  --max-width: 1280px;
+
+  --shadow-1: 0 6px 14px rgba(0,0,0,0.45);
+  --shadow-2: 0 10px 30px rgba(0,0,0,0.55);
+  --pixel-outline: 4px 4px 0 rgba(0,0,0,0.7);
+  --radius: 8px;
+
+  --gap: 1.25rem;
+  --pad: 1.25rem;
+  --font: 'Super Joyful', 'Press Start 2P', monospace, Arial, sans-serif;
+}
+
+/* ========== Custom Font =========*/
+@font-face {
+  font-family: 'Super Joyful';
+  src: url('super_joyful.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ========== Global reset ========== */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--font);
+  color: #cfcfcf;
+  background: var(--bg);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.6;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(102,126,234,0.03) 0%, transparent 30%),
+    radial-gradient(circle at 80% 80%, rgba(118,75,162,0.02) 0%, transparent 30%),
+    repeating-linear-gradient(0deg, transparent 0 2px, rgba(255,71,87,0.015) 2px 4px);
+}
+
+/* ========== Layout basics ========== */
+header, footer { width:100%; }
+main { flex:1; width:100%; max-width:var(--max-width); margin:0 auto; padding:2rem; }
+
+/* ========== Header ========== */
+header{
+  background: linear-gradient(180deg, rgba(10,10,10,0.95), rgba(7,7,7,0.95));
+  padding:1.25rem 1.5rem;
+  border-bottom: 4px solid var(--accent);
+  box-shadow: var(--shadow-1);
+  position:relative;
+}
+header::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-4px; height:4px;
+  background: linear-gradient(90deg, transparent 0 15%, var(--blue) 30%, var(--violet) 50%, var(--blue) 70%, transparent 85%);
+  opacity:0.6;
+  filter:blur(2px);
+}
+nav{ display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap; }
+nav a{
+  --padx:10px;
+  color:var(--muted);
+  text-decoration:none;
+  padding:8px 14px;
+  background: linear-gradient(180deg, #121212, #0d0d0d);
+  border:2px solid var(--card-border);
+  border-bottom-width:3px;
+  border-radius:6px;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.6);
+  transition: transform .14s ease, background .14s ease, color .14s ease, box-shadow .14s ease;
+  font-size:0.95rem;
+}
+nav a:hover{
+  transform: translate(-3px,-3px);
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  color:#fff;
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.7), 0 0 18px rgba(255,71,87,0.18);
+}
+
+/* ============= Banner ============ */
+.banner {
+  background:
+    linear-gradient(135deg, rgba(255, 71, 87, 0.9) 0%, rgba(196, 30, 46, 0.9) 100%),
+    repeating-linear-gradient(0deg, transparent 0px, rgba(0,0,0,0.3) 1px, transparent 2px, transparent 4px);
+  color: white;
+  padding: 5rem 2rem;          
+  text-align: center;
+  position: relative;
+  overflow: hidden;          
+  border-bottom: 4px solid #000;
+  box-shadow:
+    inset 0 -100px 100px rgba(0,0,0,0.3),
+    0 4px 0 var(--blue);
+    min-height: 400px;  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  align-items: center;
+  text-align: center;
+}
+
+/* Floating scanline effect */
+.banner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0px, transparent 39px, rgba(0,0,0,0.2) 39px, rgba(0,0,0,0.2) 40px),
+    repeating-linear-gradient(0deg, transparent 0px, transparent 39px, rgba(0,0,0,0.2) 39px, rgba(0,0,0,0.2) 40px);
+  opacity: 0.35;
+  animation: scanlines 8s linear infinite;
+}
+
+@keyframes scanlines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(40px); }
+}
+
+/* Rotating radial glow */
+.banner::after {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Banner content */
+.banner-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.banner-content h2 {
+  font-size: 3.5rem;               
+  margin-bottom: 1.5rem;
+  text-shadow:
+    3px 3px 0 #000,
+    6px 6px 0 rgba(102, 126, 234, 0.8),
+    9px 9px 20px rgba(0,0,0,0.9);
+  animation: titleFloat 3s ease-in-out infinite; 
+}
+
+@keyframes titleFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-10px); }
+}
+
+.banner-subtitle {
+  font-size: 1.4rem;
+  margin-bottom: 2.5rem;
+  text-shadow:
+    2px 2px 0 #000,
+    4px 4px 10px rgba(0,0,0,0.8);
+}
+
+.banner-button {
+  display: inline-block;
+  background: linear-gradient(180deg, #ffeb3b 0%, #ffc107 100%);
+  color: #000;
+  padding: 20px 50px;
+  font-size: 1.6rem;
+  border-radius: 0;
+  text-decoration: none;
+  border: 4px solid #fff;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.5),
+    inset 0 -2px 0 rgba(0,0,0,0.3),
+    0 6px 0 #d68c00,
+    0 10px 25px rgba(0,0,0,0.8);
+  position: relative;
+  overflow: hidden;
+  transition: transform .15s ease;
+}
+
+.banner-button:hover {
+  transform: translate(-3px, -3px);
+  background: linear-gradient(180deg, #fff176 0%, #ffb300 100%);
+}
+
+.banner-button::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+  transform: rotate(45deg);
+  animation: buttonShine 3s ease-in-out infinite;
+}
+
+@keyframes buttonShine {
+  0%,100% { transform: translateX(-100%) rotate(45deg); }
+  50%     { transform: translateX(100%) rotate(45deg); }
+}
+
+/* Mobile fix for banner. Theoratically, 
+I cant test, not like the game would work breh */
+@media (max-width: 768px){
+  .banner{ padding:3rem 1rem; }
+  .banner-content h2{ font-size:2rem; }
+  .banner-subtitle{ font-size:1rem; }
+  .banner-button{ padding:16px 36px; font-size:1.2rem; }
+}
+
+
+/* ========== Utility / Card base ========== */
+.container {
+  width:100%;
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:0 1rem;
+}
+
+.card {
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  border:3px solid var(--card-border);
+  border-left-width:6px;
+  border-left-color:var(--blue);
+  padding:1.25rem;
+  box-shadow: var(--shadow-1);
+  transition: transform .16s ease, box-shadow .16s ease;
+  overflow:hidden;
+}
+.card:hover{ transform: translate(-4px,-4px); box-shadow: var(--shadow-2) }
+
+.card.small{ padding:1rem; border-left-width:6px; }
+
+/* ========== Features grid / updates / sections ========== */
+.features-grid,
+.updates-container,
+.quick-links,
+.team-grid {
+  display:grid;
+  gap:1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+}
+
+.section {
+  margin-bottom:1.5rem;
+}
+.section h2{
+  font-size:1.8rem;
+  color:#fff;
+  margin-bottom:0.75rem;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.7);
+}
+
+/* ========== Buttons ========== */
+.button {
+  display:inline-block;
+  padding:10px 18px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  color:#fff;
+  border:3px solid rgba(255,255,255,0.08);
+  cursor:pointer;
+  font-weight:700;
+  border-radius:6px;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.65);
+  position:relative;
+  overflow:hidden;
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
+}
+.button::before{
+  content:"";
+  position:absolute; inset:0; transform:translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  transition: transform .4s ease;
+}
+.button:hover::before{ transform:translateX(100%) }
+.button:hover{ transform:translate(-3px,-3px); box-shadow:8px 8px 0 rgba(0,0,0,0.7) }
+
+.small-button{
+  display:inline-block;
+  padding:8px 14px;
+  background:linear-gradient(180deg,var(--blue),#5568d3);
+  color:#fff;
+  border:2px solid rgba(255,255,255,0.04);
+  border-radius:6px;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.45);
+  transition: transform .12s ease;
+}
+.small-button:hover{ transform:translate(-2px,-2px) }
+
+/* ========== Game container & iframe ========== */
+.game-wrapper{ max-width:var(--max-width); margin:0 auto; padding:0 1rem; }
+.game-container{
+  position:relative;
+  width:100%;
+  max-width:1280px;
+  aspect-ratio:16/9;
+  margin:1.75rem auto;
+  background:#000;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow: var(--shadow-2);
+  border:3px solid var(--card-border);
+}
+.game-container iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+  background:#000;
+  border-radius:6px;
+}
+
+/* Controls below game */
+.game-controls{ display:flex; gap:0.8rem; justify-content:center; margin-top:.8rem; }
+
+/* ========== Controls table ========== */
+.controls{
+  width:70%;
+  margin:1.75rem auto;
+  border-collapse:collapse;
+  background:linear-gradient(180deg,var(--panel),var(--panel-2));
+  border:3px solid var(--card-border);
+  box-shadow: var(--shadow-1);
+  font-size:0.95rem;
+}
+.controls caption{
+  padding:0.9rem 1rem;
+  font-weight:700;
+  color:#fff;
+  background:linear-gradient(180deg,#000,#0a0a0a);
+}
+.controls td, .controls th{
+  padding:12px 14px;
+  border-top:1px solid rgba(255,255,255,0.03);
+  color:var(--muted);
+}
+.controls td strong{ color:var(--accent) }
+
+/* ========== Cards / feature / update / link styles ========== */
+.feature-card, .update-card, .link-card, .team-card {
+  padding:1.25rem;
+  background:linear-gradient(180deg,var(--panel),var(--panel-2));
+  border:3px solid var(--card-border);
+  box-shadow: var(--shadow-1);
+  border-left:6px solid var(--blue);
+  transition: transform .16s ease, box-shadow .16s ease;
+}
+.feature-card:hover, .update-card:hover, .link-card:hover, .team-card:hover {
+  transform:translate(-4px,-4px);
+  box-shadow: var(--shadow-2);
+}
+.update-card { border-left-color: var(--blue); }
+.team-card:nth-child(2){ border-left-color: var(--violet) }
+.team-card:nth-child(3){ border-left-color: var(--accent) }
+
+.card-title{ font-size:1.1rem; color:#fff; margin-bottom:.6rem; }
+
+/* ========== Info box highlight ========== */
+.info-box{
+  padding:1.5rem;
+  border:3px solid var(--card-border);
+  background: linear-gradient(135deg, rgba(102,126,234,0.06), rgba(118,75,162,0.04));
+  box-shadow: var(--shadow-1);
+}
+.info-box.highlight{
+  border-color:var(--blue);
+  background: linear-gradient(135deg, rgba(102,126,234,0.12), rgba(118,75,162,0.08));
+}
+
+/* ========== Footer ========== */
+footer{
+  margin-top:2rem;
+  background: linear-gradient(180deg,#0b0b0b,#050505);
+  padding:1rem 1.25rem;
+  color:var(--muted);
+  border-top:4px solid var(--accent);
+  box-shadow: 0 -4px 0 rgba(196,30,46,0.4);
+}
+
+/* ========== Misc / typography tweaks ========== */
+h1,h2,h3,h4{ color:#fff; margin:0 0 .6rem 0; }
+p{ margin:0 0 1rem 0; color:var(--muted) }
+a{ color:var(--blue); text-decoration:none }
+a:hover{ text-decoration:underline }
+
+/* ========== Responsive ========== */
+@media (max-width: 1024px){
+  .controls{ width:90% }
+  .banner h2{ font-size:2rem }
+  .banner{ padding:2.5rem 1rem }
+}
+@media (max-width: 768px){
+  nav{ gap:0.35rem }
+  nav a{ padding:8px 10px; font-size:0.9rem }
+  .banner{ padding:1.75rem 1rem }
+  .banner h2{ font-size:1.6rem }
+  .game-container{ aspect-ratio: 16/9; max-width:100%; margin:1rem 0 }
+  .controls{ width:95% }
+  .features-grid, .updates-container, .quick-links, .team-grid{ grid-template-columns:1fr }
+  .button{ padding:9px 14px; font-size:0.95rem }
+  main{ padding:1rem }
+}
+
+/* ========== Accessibility / focus states ========== */
+button:focus, a:focus { outline: 3px dashed rgba(255,71,87,0.28); outline-offset:4px; }
+
+.center{ text-align:center }
+.mt-1{ margin-top:1rem }
+.mb-1{ margin-bottom:1rem }
