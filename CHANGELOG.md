@@ -9,3 +9,6 @@ Fixed a bug where enemies would be facing the wrong direction and not enter the 
 
 17/11/2025 - godot - commit 1:
 Implemented stopping and animation for getting hit by an enemy.
+
+24/11/2025 - godot - commit 0:
+Fixed a bug where enemies would spawn with way too much speed.
