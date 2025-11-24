@@ -1,15 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dtk7nl46u1hw3"]
+[gd_scene load_steps=5 format=3 uid="uid://dtk7nl46u1hw3"]
 
 [ext_resource type="Script" uid="uid://cs1qb7l16244p" path="res://Scripts/main.gd" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://d1w4jied5ch6i" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://dlx8fv55rmqdl" path="res://Scenes/enemy.tscn" id="2_8gbba"]
 [ext_resource type="FontFile" uid="uid://c25r3uk53bbx4" path="res://Assets/Super Joyful.ttf" id="4_jjvhh"]
-
-[sub_resource type="Curve2D" id="Curve2D_jjgbg"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -2, -2, 0, 0, 0, 0, 1152, 0, 0, 0, 0, 0, 1154, 650, 0, 0, 0, 0, -2, 650, 0, 0, 0, 0, -2, -2)
-}
-point_count = 5
 
 [node name="Main" type="Node"]
 script = ExtResource("1_bo1nx")
@@ -28,13 +22,6 @@ one_shot = true
 
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(240, 450)
-
-[node name="EnemyPath" type="Path2D" parent="."]
-curve = SubResource("Curve2D_jjgbg")
-
-[node name="EnemySpawnPosition" type="PathFollow2D" parent="EnemyPath"]
-position = Vector2(-2, -2)
-rotation = 0.0017331005
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_right = 40.0

@@ -45,9 +45,6 @@ func _new_game():
 
 func _on_enemy_timer_timeout() -> void:
 	var enemy = enemy_scene.instantiate() # Create a new instance of the enemy.
-	var enemy_spawn_loc = get_node("EnemyPath/EnemySpawnPosition") # Choose random location on path.
-	enemy_spawn_loc.progress_ratio = randf()
-	enemy.position = enemy_spawn_loc.position # VECTOR2!! Send enemy to random position.
 	var ranny = randi_range(0,3)
 	if ranny == 0:
 		enemy.position = Vector2(randf_range(0, DisplayServer.screen_get_size().x), 0)
@@ -67,7 +64,7 @@ func _on_enemy_timer_timeout() -> void:
 	# enemy.linear_velocity = velocity.rotated(direction) # Turn vector to direction.
 	enemy.linear_velocity = Vector2(direction.x, direction.y)
 	# enemy.linear_velocity = enemy.linear_velocity.normalized() * enemy.linear_velocity.length()
-	if (sqrt(enemy.linear_velocity.x ** 2 + enemy.linear_velocity.y **2) > 600):
+	if (sqrt(enemy.linear_velocity.x ** 2 + enemy.linear_velocity.y **2) > 600): # change number from static to fraction of screen size
 		var lambda = 600 ** 2 / (enemy.linear_velocity.x ** 2 + enemy.linear_velocity.y ** 2)
 		enemy.linear_velocity.x *= lambda
 		enemy.linear_velocity.y *= lambda
