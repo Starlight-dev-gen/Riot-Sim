@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d1w4jied5ch6i"]
+[gd_scene load_steps=20 format=3 uid="uid://d1w4jied5ch6i"]
 
 [ext_resource type="Texture2D" uid="uid://c6eudsqy67q7" path="res://Assets/SprPlayerDefault0.png" id="1_3smsa"]
 [ext_resource type="Script" uid="uid://cmp7g3iyrahb3" path="res://Scripts/player.gd" id="1_8erm5"]
@@ -10,6 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://dmo18dfht53ch" path="res://Assets/SprPlayerHit0.png" id="6_tx1dd"]
 [ext_resource type="Texture2D" uid="uid://1hefnrw4yvgo" path="res://Assets/SprPlayerHit1.png" id="7_gymyn"]
 [ext_resource type="Texture2D" uid="uid://b5da3h2hhgeia" path="res://Assets/SprPlayerWalk3.png" id="7_ukyrk"]
+[ext_resource type="Texture2D" uid="uid://dx5b4v12xgcq4" path="res://Assets/MeleeAnimation1.png" id="12_h4iuc"]
+[ext_resource type="Texture2D" uid="uid://dc4npv4nqqnld" path="res://Assets/MeleeAnimation2.png" id="13_fd4e3"]
+[ext_resource type="Texture2D" uid="uid://c6m1ohxrivgcv" path="res://Assets/MeleeAnimation4.png" id="14_h4iuc"]
+[ext_resource type="Texture2D" uid="uid://caytu7e6827v8" path="res://Assets/MeleeAnimation3.png" id="14_qqcod"]
+[ext_resource type="Texture2D" uid="uid://08mm18ryrk5l" path="res://Assets/MeleeAnimation5.png" id="15_fd4e3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7dp3o"]
 animations = [{
@@ -86,17 +91,59 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h4iuc"]
 size = Vector2(60, 140)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_igrcy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_h4iuc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_fd4e3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_qqcod")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_h4iuc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_fd4e3")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h4iuc"]
+radius = 19.0
+height = 80.0
+
 [node name="Player" type="Area2D"]
 script = ExtResource("1_8erm5")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7dp3o")
-animation = &"get_hit"
-frame = 1
-frame_progress = 0.07589752
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_h4iuc")
 
+[node name="Attack" type="Area2D" parent="."]
+
+[node name="AttackSprite" type="AnimatedSprite2D" parent="Attack"]
+position = Vector2(-0.06, 0)
+sprite_frames = SubResource("SpriteFrames_igrcy")
+frame = 4
+frame_progress = 0.33695874
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
+shape = SubResource("CapsuleShape2D_h4iuc")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="Attack/AttackSprite" to="." method="_on_attack_animation_finished"]

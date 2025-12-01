@@ -13,3 +13,6 @@ func _process(delta: float) -> void:
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free() # Delete instance at the end of the frame
+
+func _on_body_entered(body: Node) -> void:
+	pass # PUT THE GETTING HIT STUFF HERE!!

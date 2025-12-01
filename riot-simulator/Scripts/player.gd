@@ -8,6 +8,7 @@ var got_hit = false;
 func _ready() -> void:
 	# screen_size = get_viewport_rect().size
 	get_node("AnimatedSprite2D").play()
+	_on_attack_animation_finished()
 	# hide()
 
 
@@ -24,6 +25,8 @@ func _process(delta: float) -> void:
 			velocity.y -= 1
 		if Input.is_action_pressed("Move_down"):
 			velocity.y += 1
+		if Input.is_action_pressed("Attack"):
+			get_node("Attack/AttackSprite").play()
 	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
@@ -50,4 +53,7 @@ func _on_body_entered(body: Node2D) -> void:
 	got_hit = false
 	get_node("CollisionShape2D").set_deferred("disabled", false)
 	# Don't disable collision shape while collision is being calculated
-	
+
+
+func _on_attack_animation_finished() -> void:
+	get_node("Attack/AttackSprite").stop()
