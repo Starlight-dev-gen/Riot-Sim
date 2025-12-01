@@ -21,3 +21,6 @@ Fixed main menu background being the wrong image.
 
 24/11/2025 - godot - commit 3:
 Made the enemies face the correct way while moving.
+
+1/12/2025 - godot - commit 0:
+Began work on a melee attack implementation.
