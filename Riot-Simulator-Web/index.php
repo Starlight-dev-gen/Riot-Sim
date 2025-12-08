@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once "protected/config.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,13 +15,28 @@
 
 <body>
   <header>
-    <nav>
-      <a href="index.php">Home</a>
-      <a href="play.php">Play</a>
-      <a href="info.php">Info</a>
-      <a href="credits.php">Credits</a>
+    <nav class="nav-bar">
+
+      <div class="nav-left">
+        <a href="index.php">Home</a>
+        <a href="play.php">Play</a>
+        <a href="info.php">Info</a>
+        <a href="credits.php">Credits</a>
+      </div>
+
+      <?php if (isset($_SESSION['user_id'])): ?>
+        <div class="nav-right">
+          <span>Logged in: <?= htmlspecialchars($_SESSION['username']) ?></span>
+          <a href="logout.php" class="login-btn">Logout</a>
+        </div>
+      <?php else: ?>
+        <div class="nav-right">
+          <a href="login.php" class="login-btn">Login</a>
+        </div>
+      <?php endif; ?>
     </nav>
   </header>
+
 
   <section class="banner">
     <div class="banner-content">
