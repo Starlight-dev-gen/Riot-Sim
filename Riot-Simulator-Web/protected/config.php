@@ -1,6 +1,4 @@
 <?php 
-session_start();
-
 // Error handling while development
 error_reporting(E_ALL);
 ini_set('display_errors',1);
@@ -30,14 +28,10 @@ class Database {
     }
 }
 
-/*
-Will be initializing classes and the necessary queries here later for 
-the login system and the query for listing top 10 scores for the leaderboard
-*/
-
 // Initializing session variables
 if(!isset($_SESSION['active_timer'])) {
     $_SESSION['active_timer'] = null;
     $_SESSION['timer_start'] = null;
 }
+
 ?>
