@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once "protected/config.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,36 +15,51 @@
 
 <body>
     <header>
-        <nav>
-            <a href="index.php">Home</a>
-            <a href="play.php">Play</a>
-            <a href="info.php">Info</a>
-            <a href="credits.php">Credits</a>
-        </nav>
-    </header>
+    <nav class="nav-bar">
+
+      <div class="nav-left">
+        <a href="index.php">Home</a>
+        <a href="play.php">Play</a>
+        <a href="info.php">Info</a>
+        <a href="credits.php">Credits</a>
+      </div>
+
+      <?php if (isset($_SESSION['user_id'])): ?>
+        <div class="nav-right">
+          <span>Logged in: <?= htmlspecialchars($_SESSION['username']) ?></span>
+          <a href="logout.php" class="login-btn">Logout</a>
+        </div>
+      <?php else: ?>
+        <div class="nav-right">
+          <a href="login.php" class="login-btn">Login</a>
+        </div>
+      <?php endif; ?>
+    </nav>
+  </header>
 
     <main>
         <h2>Development Team</h2>
-        
+
         <div style="max-width: 800px; margin: 0 auto;">
             <section class="content-section">
                 <p style="color: #666; margin-bottom: 2rem;">
-                    Riot Simulator was created by a team Computer Science students from Eszterházy Károly Catholic University.
+                    Riot Simulator was created by a team Computer Science students from Eszterházy Károly Catholic
+                    University.
                 </p>
-                
+
                 <div class="team-grid">
                     <div class="team-card">
                         <h4>Castillo-Weigert Javier Ákos</h4>
                         <p>Computer Science Student</p>
                         <p>Game development, mechanics, and programming</p>
                     </div>
-                    
+
                     <div class="team-card">
                         <h4>Patkovics Zoltán</h4>
                         <p>Computer Science Student</p>
                         <p>Frontend development and testing</p>
                     </div>
-                    
+
                     <div class="team-card">
                         <h4>Turkevi-Nagy Hunor</h4>
                         <p>Computer Science Student</p>
@@ -57,8 +77,8 @@
 
             <section class="content-section">
                 <h3>Special Thanks</h3>
-                    <li>The Godot community for excellent documentation</li>
-                    <li>Apró Anikó for guidance and support</li>
+                <li>The Godot community for excellent documentation</li>
+                <li>Apró Anikó for guidance and support</li>
                 </ul>
             </section>
         </div>
