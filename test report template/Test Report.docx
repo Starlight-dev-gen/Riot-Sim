@@ -1,0 +1,164 @@
+Project: Riot game simulator 
+Testers: Castillo-Weigert Javier Ákos
+Version Tested: Web Build v1.0
+Environment:
+Browser: Chrome 121, Firefox 123
+OS: Windows 10 / Linux Mint
+Server: XAMPP local MySQL + PHP backend
+
+1. Test Summary
+The aim of testing was to verify:
+Core gameplay functionality
+Web deployment performance
+UI flows (menu ? game ? death screen)
+
+Overall stability: Good, but some minor UI and collision issues found.
+
+2. Test Items
+Tested components:
+Game Features
+Player movement & animations
+Enemy AI 
+Player damage & death
+Website & Interface
+Main menu (Start, Settings, Login)
+Keybinding settings
+Death screen & score display
+fullscreen function 
+gameplay display
+
+3. Test Scope
+Included:
+Gameplay interactions
+UI/UX behavior
+Browser performance
+Database communication
+Responsiveness and rendering
+Excluded:
+Mobile testing (not part of project)
+Cross-browser edge cases (Safari)
+Extreme server load
+
+4. Test Cases & Results
+4.1 User Interface
+Test Case
+Steps
+Expected
+Result
+UI-01: Menu loads
+Open webpage
+Main menu displays
+? Passed
+UI-02: Start button
+Click Start
+Game scene loads
+? Passed
+UI-03: Keybindings
+Change keys ? Save ? Start game
+New keys control player
+? Passed
+UI-04: Death screen
+Die in game
+Score shown + restart button
+? Minor issue (slow transition)
+
+4.2 Gameplay Mechanics
+Test Case
+Steps
+Expected
+Result
+GM-01: Player movement
+Use WASD
+Smooth movement
+? Passed
+GM-02: Player boundaries
+Move to edges
+Character stays in map
+? Occasionally clips on right side
+GM-03: Enemy movement
+Observe enemies
+Enemies follow paths / chase
+? Passed
+GM-04: Collision damage
+Collide with enemy
+HP decreases
+? Passed
+GM-05: Wave timer
+Survive 30 seconds
+Next wave spawns
+? Passed
+
+4.3 Score & Database
+Test Case
+Steps
+Expected
+Result
+DB-01: Register user
+Make new account
+Account created
+? Passed
+DB-02: Login
+Enter credentials
+Redirect to menu
+? Passed
+DB-03: Score submission
+Finish game
+Score saved to DB
+? Passed
+DB-04: Leaderboard
+Open high scores page
+Scores listed
+? Sorting incorrect on equal values
+
+4.4 Performance Tests
+Test Case
+Steps
+Expected
+Result
+PF-01: Load time
+Load game
+Under 3 sec
+? Passed
+PF-02: Enemy count stress
+Spawn 50 enemies
+< 80% CPU
+? Chrome hit 92%
+PF-03: Memory leak
+Play 10 minutes
+RAM stable
+? Passed
+
+5. Issues Found
+ID
+Description
+Severity
+Status
+BUG-01
+Right wall boundary glitch
+Medium
+Fix in progress
+BUG-02
+Leaderboard sorting incorrect
+Low
+Open
+BUG-03
+Slow transition to death screen
+Low
+Open
+BUG-04
+CPU spikes with >40 enemies
+Medium
+Optimization required
+
+6. Recommendations
+Add boundary checks using clamp() in Godot to prevent wall clipping
+Preload UI scenes to fix delayed death screen
+Add server-side sorting for leaderboard
+Reduce unnecessary draw calls or enemy update frequency
+
+7. Conclusion
+The game is functional and stable for a version 1.0 release.
+Primary gameplay works smoothly, and no critical errors prevent users from playing or saving scores.
+Several performance and UX issues remain, but they do not block gameplay.
+
+
