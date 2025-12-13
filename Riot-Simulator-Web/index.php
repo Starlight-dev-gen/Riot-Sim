@@ -22,6 +22,7 @@ require_once "protected/config.php";
         <a href="play.php">Play</a>
         <a href="info.php">Info</a>
         <a href="credits.php">Credits</a>
+        <a href="leaderboard.php">Leaderboard</a>
       </div>
 
       <?php if (isset($_SESSION['user_id'])): ?>
@@ -55,8 +56,8 @@ require_once "protected/config.php";
           <h3>Version 1.1 - Initial Release</h3>
           <ul>
             <li>Improved Gameplay</li>
-            <li>Login System</li>
-            <li>???</li>
+            <li>Registration</li>
+            <li>Leaderboard<li>
             <li>???</li>
           </ul>
         </div>
