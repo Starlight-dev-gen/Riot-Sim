@@ -16,99 +16,99 @@ require_once "protected/config.php";
 </head>
 
 <header>
-    <nav class="nav-bar">
+  <nav class="nav-bar">
 
-      <div class="nav-left">
-        <a href="index.php">Home</a>
-        <a href="play.php">Play</a>
-        <a href="info.php">Info</a>
-        <a href="credits.php">Credits</a>
-      </div>
-
-      <?php if (isset($_SESSION['user_id'])): ?>
-        <div class="nav-right">
-          <span>Logged in: <?= htmlspecialchars($_SESSION['username']) ?></span>
-          <a href="logout.php" class="login-btn">Logout</a>
-        </div>
-      <?php else: ?>
-        <div class="nav-right">
-          <a href="login.php" class="login-btn">Login</a>
-        </div>
-      <?php endif; ?>
-    </nav>
-  </header>
-
-  <main>
-    <div class="game-wrapper">
-
-      <div class="game-container">
-        <iframe id="game-frame" src="game/RiotSim/RiotSim.html" allowfullscreen>
-        </iframe>
-      </div>
-
-      <div class="game-controls">
-        <button id="fullscreen-btn" class="button">Fullscreen (F)</button>
-        <button id="reload-btn" class="button">Reload Game (R)</button>
-      </div>
-
+    <div class="nav-left">
+      <a href="index.php">Home</a>
+      <a href="play.php">Play</a>
+      <a href="info.php">Info</a>
+      <a href="credits.php">Credits</a>
+      <a href="leaderboard.php">Leaderboard</a>
     </div>
 
-    <table class="controls">
-      <caption>Default Controls</caption>
-      <tr>
-        <td><strong>Move</strong></td>
-        <td>WASD</td>
-      </tr>
-    </table>
+    <?php if (isset($_SESSION['user_id'])): ?>
+      <div class="nav-right">
+        <span>Logged in: <?= htmlspecialchars($_SESSION['username']) ?></span>
+        <a href="logout.php" class="login-btn">Logout</a>
+      </div>
+    <?php else: ?>
+      <div class="nav-right">
+        <a href="login.php" class="login-btn">Login</a>
+      </div>
+    <?php endif; ?>
+  </nav>
+</header>
 
-  </main>
+<main>
+  <div class="game-wrapper">
 
-  <footer>
-    <p>&copy; 2025 JavZolSta EKCU DevOps</p>
-  </footer>
+    <div class="game-container">
+      <iframe id="game-frame" src="game/RiotSim/RiotSim.html" allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="game-controls">
+      <button id="fullscreen-btn" class="button">Fullscreen (F)</button>
+      <button id="reload-btn" class="button">Reload Game (R)</button>
+    </div>
+
+  </div>
+
+  <table class="controls">
+    <caption>Default Controls</caption>
+    <tr>
+      <td><strong>Move</strong></td>
+      <td>WASD</td>
+    </tr>
+  </table>
+
+</main>
+
+<footer>
+  <p>&copy; 2025 JavZolSta EKCU DevOps</p>
+</footer>
 </body>
 
 <script>
-  const iframe = document.getElementById("game-frame");
-  const fullscreenBtn = document.getElementById("fullscreen-btn");
-  const reloadBtn = document.getElementById("reload-btn");
+  document.addEventListener("DOMContentLoaded", () => {
+    const iframe = document.getElementById("game-frame");
+    const fullscreenBtn = document.getElementById("fullscreen-btn");
+    const reloadBtn = document.getElementById("reload-btn");
 
-  function goFullscreen() {
-    if (iframe.requestFullscreen) iframe.requestFullscreen();
-    else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
-    else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen();
-  }
+    function goFullscreen() {
+      if (!iframe) return;
+      if (iframe.requestFullscreen) iframe.requestFullscreen();
+      else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
+      else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen();
+    }
 
-  fullscreenBtn.addEventListener("click", goFullscreen);
+    fullscreenBtn?.addEventListener("click", goFullscreen);
+    reloadBtn?.addEventListener("click", () => {
+      iframe.src = iframe.src;
+    });
 
+    document.addEventListener("keydown", e => {
+      const key = e.key.toLowerCase();
+      if (key === "f") goFullscreen();
+      if (key === "r") iframe.src = iframe.src;
+    });
 
-  reloadBtn.addEventListener('click', () => {
-    iframe.src = iframe.src;
-  });
-
-  document.addEventListener("keydown", e => {
-    const key = e.key.toLowerCase();
-    if (key === "f") goFullscreen();
-    if (key === "r") iframe.src = iframe.src;
-  });
-
-  // Fix canvas scaling in fullscreen
-  document.addEventListener("fullscreenchange", () => {
-    try {
-      const doc = iframe.contentDocument || iframe.contentWindow.document;
-      const canvas = doc.querySelector("canvas");
-      if (!canvas) return;
-
-      const isFullscreen = document.fullscreenElement === iframe;
-      canvas.style.width = isFullscreen ? "100vw" : "";
-      canvas.style.height = isFullscreen ? "100vh" : "";
-      canvas.style.objectFit = isFullscreen ? "contain" : "";
-    } catch { }
-  });
-
-  document.addEventListener('fullscreenchange', () => {
-    const isFs = document.fullscreenElement === iframe;
-    resizeCanvasInIframe(isFs);
+    // Godot 
+    function saveScoreToServer(time) {
+      fetch("save_score.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: new URLSearchParams({
+            time
+          })
+        })
+        .then(r => r.json())
+        .then(data => console.log("Score saved:", data))
+        .catch(err => console.error("Save error:", err));
+    }
+    window.saveScoreToServer = saveScoreToServer;
   });
 </script>
 
