@@ -1,17 +1,19 @@
-<?php 
+<?php
 // Error handling while development
 error_reporting(E_ALL);
-ini_set('display_errors',1);
+ini_set('display_errors', 1);
 
 // Database Connection
-class Database {
+class Database
+{
     private $host = "localhost";
-    private $db_name = "task_manager";
+    private $db_name = "riot_sim";
     private $username = "root";
     private $password = "";
     public $conn;
 
-    public function getConnection() {
+    public function getConnection()
+    {
         $this->conn = null;
         try {
             $this->conn = new PDO(
@@ -22,16 +24,18 @@ class Database {
             $this->conn->exec("set names utf8");
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $exception) {
-                echo "Connection error: " . $exception->getMessage(); // Only here for the development
+            echo "Connection error: " . $exception->getMessage(); // Only here for the development
         }
         return $this->conn;
     }
 }
 
+$db = new Database();
+$pdo = $db->getConnection();
+
 // Initializing session variables
-if(!isset($_SESSION['active_timer'])) {
+if (!isset($_SESSION['active_timer'])) {
     $_SESSION['active_timer'] = null;
     $_SESSION['timer_start'] = null;
 }
-
 ?>
