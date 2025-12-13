@@ -88,8 +88,9 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h4iuc"]
-size = Vector2(60, 140)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fd4e3"]
+radius = 30.0
+height = 130.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_igrcy"]
 animations = [{
@@ -132,7 +133,8 @@ metadata/_edit_group_ = true
 sprite_frames = SubResource("SpriteFrames_7dp3o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_h4iuc")
+position = Vector2(0, 5)
+shape = SubResource("CapsuleShape2D_fd4e3")
 
 [node name="Attack" type="Area2D" parent="."]
 

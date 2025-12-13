@@ -5,7 +5,6 @@ var hp = 3
 var Timer_label = null
 var Health_label = null
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_new_game()
@@ -35,6 +34,7 @@ func _game_over():
 	get_node("ScoreTimer").stop()
 	get_node("EnemyTimer").stop()
 	get_tree().change_scene_to_file("res://Scenes/death.tscn")
+	JavaScriptBridge.create_object("Score", score)
 
 
 func _new_game():
@@ -56,12 +56,7 @@ func _on_enemy_timer_timeout() -> void:
 	else:
 		enemy.position = Vector2(DisplayServer.screen_get_size().x,
 			randf_range(0, DisplayServer.screen_get_size().y))
-	# var direction = enemy_spawn_loc.rotation + PI / 2 # Turn enemy perpendicular to path (90°).
 	var direction = get_node("Player").position - enemy.position 
-	# direction += randf_range(-PI / 4, PI / 4) # Randomise direction (within 45°).
-	# enemy.rotation = direction # Apply rotations.
-	# var velocity = Vector2(randf_range(200.0, 300), 0.0) # Make random velocity vector.
-	# enemy.linear_velocity = velocity.rotated(direction) # Turn vector to direction.
 	enemy.linear_velocity = Vector2(direction.x, direction.y)
 	# enemy.linear_velocity = enemy.linear_velocity.normalized() * enemy.linear_velocity.length()
 	if (sqrt(enemy.linear_velocity.x ** 2 + enemy.linear_velocity.y **2) > 600):

@@ -2,7 +2,10 @@ extends Area2D
 @export var speed = 400 # Player speed (pixels/sec).
 var screen_size # Window size.
 signal hit
-var got_hit = false;
+var got_hit = false
+var mouse_pos
+var is_attacking = false
+@export var melee_range = 80
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,6 +18,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	screen_size = get_viewport_rect().size # GOOD CHANGE. KEEP. FIND A WAY TO FIX ENEMY SPAWN.
+	mouse_pos = get_global_mouse_position()
 	var velocity = Vector2.ZERO
 	if not got_hit:
 		if Input.is_action_pressed("Move_right"):
@@ -25,8 +29,12 @@ func _process(delta: float) -> void:
 			velocity.y -= 1
 		if Input.is_action_pressed("Move_down"):
 			velocity.y += 1
-		if Input.is_action_pressed("Attack"):
-			get_node("Attack/AttackSprite").play()
+		#if Input.is_action_pressed("Attack"):
+		#	var atk_vector = (mouse_pos - position).clamp(
+		#		Vector2(-melee_range, -melee_range - 20), Vector2(melee_range, melee_range + 20))
+		#	get_node("Attack").position = atk_vector
+		#	get_node("Attack").rotation = PI + get_angle_to(get_global_mouse_position())
+		#	get_node("Attack/AttackSprite").play()
 	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
